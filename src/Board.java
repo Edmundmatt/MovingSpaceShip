@@ -23,8 +23,31 @@ public class Board extends JPanel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
+        doDrawing(g);
+
+        Toolkit.getDefaultToolkit().sync();
+    }
+
+    private void doDrawing(Graphics g) {
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
+                spaceShip.getY(), this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        step();
+    }
+
+    private void step(){
+        spaceShip.move();
+        repaint(spaceShip.getX()-1, spaceShip.getY()-5,
+                spaceShip.getWidth()+10, spaceShip.getHeight()+10);
     }
 
     private class TAdapter extends KeyAdapter {

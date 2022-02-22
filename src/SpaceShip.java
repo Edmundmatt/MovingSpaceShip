@@ -22,8 +22,9 @@ public class SpaceShip {
 
     private void loadImage() {
 
+        ImageClass ic = new ImageClass();
         ImageIcon ii = new ImageIcon("src/resources/NicePng_space-ship-png_176093.png");
-        image = ii.getImage();
+        image = ic.resize(ii.getImage(), 0.25);
 
         w = image.getWidth(null);
         h = image.getHeight(null);
@@ -31,6 +32,14 @@ public class SpaceShip {
     public void move(){
         x += dx;
         y += dy;
+    }
+
+    public Image getImage(){
+        return this.image;
+    }
+
+    private void fire(){
+
     }
 
     public int getX(){
@@ -75,6 +84,10 @@ public class SpaceShip {
 
         if (key == KeyEvent.VK_DOWN) {
             dy = 2;
+        }
+
+        if (key == KeyEvent.VK_SPACE) {
+            shoot();
         }
     }
 
